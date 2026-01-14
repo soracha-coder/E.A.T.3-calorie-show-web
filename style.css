@@ -1,0 +1,266 @@
+@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap");
+
+:root{
+  --bg0:#02030a;
+  --bg1:#040818;
+  --bg2:#0a1440;
+
+  --glass: rgba(255,255,255,.06);
+  --stroke: rgba(255,255,255,.14);
+  --text: rgba(255,255,255,.94);
+  --muted: rgba(255,255,255,.68);
+
+  --neonA:#00c6ff;
+  --neonB:#7c3aed;
+  --neonC:#43e97b;
+  --neonD:#ff4d6d;
+
+  --shadow: 0 30px 80px rgba(0,0,0,.65);
+  --radius: 22px;
+}
+
+*{
+  box-sizing:border-box;
+  font-family:"Prompt", system-ui, sans-serif;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  background:
+    radial-gradient(1000px 500px at 20% 10%, rgba(124,58,237,.35), transparent 60%),
+    radial-gradient(1000px 500px at 80% 0%, rgba(0,198,255,.28), transparent 60%),
+    radial-gradient(1200px 700px at 60% 110%, rgba(67,233,123,.12), transparent 65%),
+    linear-gradient(135deg, var(--bg0), var(--bg1), var(--bg2));
+  overflow-x:hidden;
+}
+
+/* ⭐ Star field */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.55;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, #fff 99%, transparent),
+    radial-gradient(1px 1px at 25% 80%, #fff 99%, transparent),
+    radial-gradient(1px 1px at 45% 35%, #fff 99%, transparent),
+    radial-gradient(1px 1px at 60% 70%, #fff 99%, transparent),
+    radial-gradient(1px 1px at 75% 25%, #fff 99%, transparent),
+    radial-gradient(1px 1px at 90% 55%, #fff 99%, transparent);
+  filter: drop-shadow(0 0 6px rgba(255,255,255,.3));
+  animation: starMove 14s ease-in-out infinite alternate;
+}
+
+@keyframes starMove{
+  from{ transform:translateY(0); }
+  to{ transform:translateY(-14px); }
+}
+
+/* ===== Layout ===== */
+.container{
+  max-width:980px;
+  margin:auto;
+  padding:26px 16px 52px;
+  position:relative;
+  z-index:1;
+}
+
+h1{
+  text-align:center;
+  font-size:32px;
+  margin:6px 0;
+  text-shadow:0 0 25px rgba(0,198,255,.25);
+}
+
+.subtitle{
+  text-align:center;
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:20px;
+}
+
+/* ===== Card ===== */
+.card{
+  background:var(--glass);
+  border:1px solid var(--stroke);
+  border-radius:var(--radius);
+  padding:18px;
+  margin-bottom:16px;
+  backdrop-filter: blur(18px);
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:inherit;
+  background:linear-gradient(
+    135deg,
+    rgba(0,198,255,.35),
+    rgba(124,58,237,.35),
+    rgba(67,233,123,.25),
+    rgba(255,77,109,.15)
+  );
+  filter:blur(20px);
+  opacity:.35;
+  pointer-events:none;
+}
+
+.card h2{
+  margin:0 0 10px;
+  font-size:18px;
+}
+
+/* ===== Form ===== */
+label{
+  font-size:14px;
+  margin-bottom:4px;
+  color:rgba(255,255,255,.85);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.field{ display:flex; flex-direction:column; gap:6px; }
+.field.full{ grid-column:1/-1; }
+
+input, select{
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(0,0,0,.35);
+  color:#fff;
+}
+
+input:focus, select:focus{
+  outline:none;
+  border-color:var(--neonA);
+  box-shadow:0 0 0 3px rgba(0,198,255,.2);
+}
+
+/* ===== Buttons ===== */
+.actions{
+  margin-top:12px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+button{
+  padding:10px 16px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  cursor:pointer;
+  transition:.2s;
+}
+
+button:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.1);
+}
+
+#calcBtn{
+  background:linear-gradient(135deg, var(--neonA), var(--neonB));
+  box-shadow:0 12px 32px rgba(0,198,255,.25);
+}
+
+#menuBtn{
+  background:linear-gradient(135deg, var(--neonC), #38f9d7);
+  color:#003b2f;
+  box-shadow:0 12px 32px rgba(67,233,123,.25);
+}
+
+/* ===== 🔥 Checkbox (แก้ตรงนี้สำคัญมาก) ===== */
+.chips{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:10px;
+  margin-top:8px;
+}
+
+.chip{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:14px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);
+  cursor:pointer;
+  transition:.2s;
+}
+
+.chip:hover{
+  background:rgba(255,255,255,.14);
+}
+
+.chip input[type="checkbox"]{
+  appearance:none;
+  width:22px;
+  height:22px;
+  border-radius:6px;
+  border:2px solid rgba(255,255,255,.5);
+  position:relative;
+  cursor:pointer;
+}
+
+.chip input[type="checkbox"]:checked{
+  background:linear-gradient(135deg,var(--neonA),var(--neonB));
+  border-color:transparent;
+}
+
+.chip input[type="checkbox"]:checked::after{
+  content:"✓";
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-55%);
+  color:#fff;
+  font-size:14px;
+  font-weight:700;
+}
+
+/* ===== Results ===== */
+.resultGrid{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.resultBox{
+  flex:1 1 240px;
+  background:rgba(0,0,0,.35);
+  border-radius:16px;
+  padding:14px;
+  border:1px solid rgba(255,255,255,.15);
+}
+
+.resultBox .label{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.resultBox .value{
+  font-size:22px;
+  font-weight:600;
+  margin-top:4px;
+  color:var(--neonC);
+}
+
+.note{
+  margin-top:10px;
+  font-size:13px;
+  color:var(--muted);
+}
